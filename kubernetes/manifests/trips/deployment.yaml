@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripinsights-trips-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tripinsights-trips-app
+  template:
+    metadata:
+      labels:
+        app: tripinsights-trips-app
+    spec:
+      containers:
+      - name: trips
+        image: registryftf5727.azurecr.io/trips:1.0
+        env:
+        - name: SQL_USER
+          value: "sqladminfTf5727"
+        - name: SQL_SERVER
+          value: "sqlserverftf5727.database.windows.net"
+        - name: SQL_DBNAME
+          value: "mydrivingDB"
+        - name: OPENAPI_DOCS_URI
+          value: "http://localhost"
+        - name: SQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-server-secret
+              key: password
+        ports:
+        - containerPort: 80
