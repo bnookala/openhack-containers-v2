@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: trips-service
+spec:
+  selector:
+    app: tripinsights-trips-app
+  type: LoadBalancer
+  ports:
+  - port: 80
