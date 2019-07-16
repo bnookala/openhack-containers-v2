@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripinsights-userprofile-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tripinsights-userprofile-app
+  template:
+    metadata:
+      labels:
+        app: tripinsights-userprofile-app
+    spec:
+      containers:
+      - name: userprofile
+        image: registryftf5727.azurecr.io/userprofile:1.0
+        env:
+        - name: SQL_USER
+          value: "sqladminfTf5727"
+        - name: SQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-server-secret
+              key: password
+        - name: SQL_SERVER
+          value: "sqlserverftf5727.database.windows.net"
+        - name: SQL_DBNAME
+          value: "mydrivingDB"
+        ports:
+        - containerPort: 80
