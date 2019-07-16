@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripinsights-tripviewer-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tripinsights-tripviewer-app
+  template:
+    metadata:
+      labels:
+        app: tripinsights-tripviewer-app
+    spec:
+      containers:
+      - name: travelviewer
+        image: registryftf5727.azurecr.io/tripviewer:1.0
+        env:
+        - name: USER_API_ENDPOINT
+          value: "http://userprofile-service"
+        - name: TRIPS_API_ENDPOINT
+          value: "http://trips-service"
+        ports:
+        - containerPort: 80
