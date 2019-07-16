@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripinsights-poi-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tripinsights-poi-app
+  template:
+    metadata:
+      labels:
+        app: tripinsights-poi-app
+    spec:
+      containers:
+      - name: poi
+        image: registryftf5727.azurecr.io/poi:1.0
+        env:
+        - name: SQL_USER
+          value: "sqladminfTf5727"
+        - name: SQL_SERVER
+          value: "sqlserverftf5727.database.windows.net"
+        - name: SQL_DBNAME
+          value: "mydrivingDB"
+        - name: SQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-server-secret
+              key: password
+        ports:
+        - containerPort: 80
