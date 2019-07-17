@@ -11,10 +11,15 @@ spec:
     metadata:
       labels:
         app: tripinsights-poi-app
+        aadpodidbinding: keyvault-enabled
     spec:
       containers:
       - name: poi
         image: registryftf5727.azurecr.io/poi:1.0
+        volumeMounts:
+        - name: test
+          mountPath: /secrets
+          readOnly: true
         env:
         - name: SQL_USER
           value: "sqladminfTf5727"
@@ -23,9 +28,18 @@ spec:
         - name: SQL_DBNAME
           value: "mydrivingDB"
         - name: SQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: sql-server-secret
-              key: password
         ports:
         - containerPort: 80
+      volumes:
+      - name: test
+        flexVolume:
+          driver: "azure/kv"
+          options:
+            usepodidentity: "true"         
+            keyvaultname: "ohaks-keyvault"               
+            keyvaultobjectnames: "SQLPASSWORD"
+            keyvaultobjectaliases: "SQL_PASSWORD"        
+            keyvaultobjecttypes: secret    
+            resourcegroup: "teamresources"              
+            subscriptionid: "676afd27-7ef9-48fe-b892-3e40a48d3385"             
+            tenantid: "320aa98e-f000-47f8-a7da-aad28653e19b"               

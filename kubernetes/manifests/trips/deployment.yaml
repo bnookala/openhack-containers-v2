@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         app: tripinsights-trips-app
+        aadpodidbinding: enabled
+        usepodidentity: "true"
     spec:
       containers:
       - name: trips

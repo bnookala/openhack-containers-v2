@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         app: tripinsights-user-app
+        aadpodidbinding: enabled
+        usepodidentity: "true"
     spec:
       containers:
       - name: user

@@ -1,0 +1,8 @@
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentity
+metadata:
+  name: keyvault-identity
+spec:
+  type: 0
+  ResourceID: /subscriptions/676afd27-7ef9-48fe-b892-3e40a48d3385/resourcegroups/teamresources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/keyvault-identity
+  ClientID: 12b4a0e9-9697-429a-b9d7-f5c7b5ef13f1
