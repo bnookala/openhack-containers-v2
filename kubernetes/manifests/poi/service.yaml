@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: poi-service
-spec:
-  selector:
-    app: tripinsights-poi-app
-  ports:
-  - port: 80
