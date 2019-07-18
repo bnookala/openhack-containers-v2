@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: tripinsights-poi-app
-        aadpodidbinding: keyvault-enabled
+        aadpodidbinding: identityenabled
     spec:
       containers:
       - name: poi
@@ -28,7 +28,6 @@ spec:
           value: "sqlserverftf5727.database.windows.net"
         - name: SQL_DBNAME
           value: "mydrivingDB"
-        - name: SQL_PASSWORD
         ports:
         - containerPort: 80
       volumes:
@@ -36,11 +35,11 @@ spec:
         flexVolume:
           driver: "azure/kv"
           options:
-            usepodidentity: "true"         
-            keyvaultname: "ohaks-keyvault"               
+            usepodidentity: "true"
+            keyvaultname: "ohaks-keyvault"
             keyvaultobjectnames: "SQLPASSWORD"
-            keyvaultobjectaliases: "SQL_PASSWORD"        
-            keyvaultobjecttypes: secret    
-            resourcegroup: "teamresources"              
-            subscriptionid: "676afd27-7ef9-48fe-b892-3e40a48d3385"             
-            tenantid: "320aa98e-f000-47f8-a7da-aad28653e19b"               
+            keyvaultobjectaliases: "SQL_PASSWORD"
+            keyvaultobjecttypes: secret
+            resourcegroup: "teamResources"
+            subscriptionid: "676afd27-7ef9-48fe-b892-3e40a48d3385"
+            tenantid: "320aa98e-f000-47f8-a7da-aad28653e19b"

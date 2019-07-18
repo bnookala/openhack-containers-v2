@@ -18,8 +18,8 @@ spec:
         image: registryftf5727.azurecr.io/tripviewer:1.0
         env:
         - name: USER_API_ENDPOINT
-          value: "http://userprofile-service"
+          value: "http://userprofile-service.api"
         - name: TRIPS_API_ENDPOINT
-          value: "http://trips-service"
+          value: "http://trips-service.api"
         ports:
         - containerPort: 80
