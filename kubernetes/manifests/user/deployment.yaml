@@ -4,7 +4,7 @@ metadata:
   name: tripinsights-user-deploy
   namespace: api
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: tripinsights-user-app
